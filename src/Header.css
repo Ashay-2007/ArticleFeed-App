@@ -1,0 +1,19 @@
+.header {
+    position: sticky;
+    top: 0 !important;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
+    background-color: white;
+}
+.header__logo {
+    /* flex: 1; */
+    object-fit: contain;
+    max-height: 40px;
+}
+.header__loginContainer {
+    /* flex: 0; */
+}
