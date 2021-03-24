@@ -4,6 +4,7 @@ import Header from './Header';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
+import Dashboard from './Dashboard';
 
 
 function App() {
@@ -16,6 +17,10 @@ function App() {
           </Route>
           <Route path="/register">
             <Register/>
+          </Route>
+          <Route path="/dashboard">
+            <Header/>
+            <Dashboard/>
           </Route>
           <Route path="/">
             <Header/>

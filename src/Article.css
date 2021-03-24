@@ -1,0 +1,40 @@
+.article {
+    background-color: white;
+    max-width: 1000px;
+    border: 1px solid lightgray;
+    margin-bottom: 45px;
+}
+
+.article__header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
+}
+
+.article__info{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 20px;
+}
+
+.article__info > h3 {
+    font-size: 20px;
+}
+
+.article__timestamp{
+    font-size: small;
+}
+
+.article__title {
+    padding: 20px;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 18px;
+}
+
+.article__description {
+    padding: 20px;
+}
