@@ -2,12 +2,24 @@ import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import "./Login.css";
+import {auth} from "./firebase";
 
 function Login() {
     const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const signIn = (event) => {
+        event.preventDefault();
+        auth
+          .signInWithEmailAndPassword(email, password)
+          .then(auth => {
+              history.push('/')
+              console.log(auth.user)
+          })
+          .catch((error) => alert(error.message));
+        
+    }
     
 
     return (   
@@ -30,7 +42,7 @@ function Login() {
                     <h5>Password</h5>
                     <input type='password' value={password} onChange={e => setPassword(e.target.value)} />
 
-                    <button type='submit' className='login__signInButton'>Sign In</button>
+                    <button type='submit' onClick={signIn} className='login__signInButton'>Sign In</button>
                 </form>
 
                 <p>

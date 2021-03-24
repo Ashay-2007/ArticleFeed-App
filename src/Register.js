@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Multiselect } from "multiselect-react-dropdown";
 import "./Register.css";
+import {auth} from "./firebase";
 
 function Register() {
     const data = [
@@ -19,7 +20,25 @@ function Register() {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [options] = useState(data)
+
     
+    const register = (event) => {
+        event.preventDefault();
+        
+        auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((authUser) => {
+            if (auth) {
+                history.push('/')
+            }
+            return authUser.user.updateProfile({
+                displayName: username
+          })
+        })
+        .catch((error) => alert(error.message))
+    
+    }
+
     return (
         <div className='register'>
             <Link to='/'>
@@ -53,7 +72,7 @@ function Register() {
                     see our Privacy Notice, our Cookies Notice and our Interest-Based Ads Notice.
                 </p>
 
-                <button  className='register__signupButton'>Create your ArticleFeed Account</button>
+                <button  className='register__signupButton' onClick={register}>Create your ArticleFeed Account</button>
             </div>
         </div>
     )
