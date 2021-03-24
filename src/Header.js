@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Header() {
     const [user, setUser] = useState(null);
+
     return (
         <div className="header">
             <Link>
@@ -18,8 +19,13 @@ function Header() {
                 <Button>Logout</Button>
             ) : (
                 <div className="header__loginContainer">
-                    <Button>Sign In</Button>
-                    <Button>Sign Up</Button>
+                    <Link to="/login">
+                        <Button>Sign In</Button>
+                    </Link>
+                    <Link to="/register">
+                        <Button>Sign Up</Button>
+                    </Link>
+                    
                 </div>
             )
 
