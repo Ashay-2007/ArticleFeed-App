@@ -33,6 +33,7 @@
     font-weight: 500;
     font-style: italic;
     font-size: 18px;
+    color: #a00606;
 }
 
 .article__description {
@@ -45,5 +46,5 @@
 }
 .article__imageContainer{
     margin-left: 20px;
-    /* margin-right: auto; */
+    margin-right: 10px;
 }

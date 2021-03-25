@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { auth } from './firebase';
 import { useStateValue } from './StateProvider';
 import NewArticle from './NewArticle';
+import CategoryArticles from './CategoryArticles';
 
 
 function App() {
@@ -51,6 +52,30 @@ function App() {
           <Route path="/new_article">
             <Header/>
             <NewArticle/>
+          </Route>
+          <Route path="/sports">
+            <Header/>
+            <CategoryArticles category="sports"/>
+          </Route>
+          <Route path="/politics">
+            <Header/>
+            <CategoryArticles category="politics"/>
+          </Route>
+          <Route path="/technology">
+            <Header/>
+            <CategoryArticles category="technology"/>
+          </Route>
+          <Route path="/space">
+            <Header/>
+            <CategoryArticles category="space"/>
+          </Route>
+          <Route path="/travel">
+            <Header/>
+            <CategoryArticles category="travel"/>
+          </Route>
+          <Route path="/fashion">
+            <Header/>
+            <CategoryArticles category="fashion"/>
           </Route>
           <Route path="/">
             <Header/>

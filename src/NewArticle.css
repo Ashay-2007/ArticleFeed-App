@@ -1,4 +1,4 @@
-.newArticle {
+.newArticle__container {
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -13,7 +13,7 @@
     margin-bottom: 45px;
 }
 
-.newArticleUpload__progress {
+.newArticle__uploadProgress {
     width: 100%;
 }
 
@@ -36,7 +36,7 @@
     border-color: #a88734 #9c7e31 #846a29;
 }
 
-.dashboard__articles {
+.newArticle__pastArticles {
     
     display: flex;
     flex-direction: column;
@@ -52,8 +52,9 @@
     margin-bottom: 45px;
 }
 
-.dashboard__articles > p {
+.newArticle__pastArticles > p {
     font-weight: 500;
-    font-size: 50px;
+    font-size: 30px;
+    margin: 10px;
 
 }

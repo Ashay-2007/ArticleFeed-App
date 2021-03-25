@@ -24,7 +24,18 @@ function Header() {
             </Link>
             
             {user ? (
-                <Button onClick={handleAuthentication}>Logout</Button>
+                <div className="header__loginContainer">    
+                    <Link to="/">
+                        <Button>Home</Button>
+                    </Link>
+                    <Link to="/dashboard">
+                        <Button>Dashboard</Button>
+                    </Link>
+                    <Link to="/new_article">
+                        <Button>Create</Button>
+                    </Link>
+                    <Button onClick={handleAuthentication}>Logout</Button>
+                </div>
             ) : (
                 <div className="header__loginContainer">
                     <Link to="/login">

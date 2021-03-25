@@ -10,6 +10,7 @@ function NewArticle({username}) {
     const [progress, setProgress] = useState(0);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('')
+    const [category, setCategory] = useState('')
     const [articles, setArticles] = useState([])
     const [{user}] = useStateValue();
     
@@ -54,7 +55,8 @@ function NewArticle({username}) {
                             title: title,
                             imageUrl: url,
                             description: description,
-                            username: user.displayName
+                            username: user.displayName,
+                            category: category
                         });
 
                         setProgress(0);
@@ -68,31 +70,51 @@ function NewArticle({username}) {
     };
 
     return (
-        <div className="new">
-            <div className="newArticle">
-                <input className="newArticle__title" type="text" placeholder="Enter a title..." onChange={event => setTitle(event.target.value)} value={title}/>
-                <input type="file" onChange={handleChange}/>
-                <textarea className="newArticle__description" type="text" placeholder="Enter decription of the article..." onChange={event => setDescription(event.target.value)} value={description}/>
-                <button className="newArticle__button" onClick={handleUpload}>
-                    Upload
-                </button>
-                <progress className="newArticleUpload__progress" value={progress} max="100"/>
-            </div>
-             
-            <div className="dashboard__articles">
-                {/* <p>Welcome {!user? "Guest" : user.displayName} ! Here are the article as per your preferences.</p> */}
+        <div>
+            {user ? (
         
-                {
-                articles.map(({id, article}) => (
-                    <Article key={id} articleId={id} user={user} username={article.username} title={article.title} imageUrl={article.imageUrl} description={article.description} timestamp={new Date(article.timestamp?.toDate()).toUTCString()}/>
-                ))
-                }
-      
-        
+                <div>
+                    <div className="newArticle__container">
+                        <select value={category} onChange={e => setCategory(e.target.value)}>
+                            <option value="sports">Sports</option>
+                            <option value="politics">Politics</option>
+                            <option value="space">Space</option>
+                            <option value="technology">Technology</option>
+                            <option value="travel">Travel</option>
+                            <option value="fashion">Fashion</option>
+                        </select>
+                        <input className="newArticle__title" type="text" placeholder="Enter a title..." onChange={event => setTitle(event.target.value)} value={title}/>
+                        <input type="file" onChange={handleChange}/>
+                        <textarea className="newArticle__description" type="text" placeholder="Enter decription of the article..." onChange={event => setDescription(event.target.value)} value={description}/>
+                        <button className="newArticle__button" onClick={handleUpload}>
+                            Upload
+                        </button>
+                        <progress className="newArticle__uploadProgress" value={progress} max="100"/>
+                    </div>
+                    
+                    <div className="newArticle__pastArticles">
+                        <p>Welcome {!user? "Guest" : user.displayName} ! Here are your past articles</p>
                 
-            </div>
-        </div>
+                        {
+                        articles.map(({id, article}) => {
+
+                            if(article.username === user.displayName)
+                                return <Article key={id} articleId={id} user={user} username={article.username} title={article.title} imageUrl={article.imageUrl} description={article.description} timestamp={new Date(article.timestamp?.toDate()).toUTCString()}/>
+                                
+                            })
+                        }
+                
+                    </div>
+                </div>
         
+            ) :
+            (
+                <p>Please log in to continue</p>
+            )
+            }
+    
+        </div>
+         
         
     )
 }
