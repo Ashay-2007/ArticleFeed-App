@@ -14,7 +14,7 @@ function Login() {
         auth
           .signInWithEmailAndPassword(email, password)
           .then(auth => {
-              history.push('/')
+              history.push('/dashboard')
               console.log(auth.user)
           })
           .catch((error) => alert(error.message));

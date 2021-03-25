@@ -29,7 +29,7 @@ function Register() {
         .createUserWithEmailAndPassword(email, password)
         .then((authUser) => {
             if (auth) {
-                history.push('/')
+                history.push('/dashboard')
             }
             return authUser.user.updateProfile({
                 displayName: username

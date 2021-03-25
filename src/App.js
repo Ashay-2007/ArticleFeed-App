@@ -8,6 +8,7 @@ import Dashboard from './Dashboard';
 import { useEffect } from 'react';
 import { auth } from './firebase';
 import { useStateValue } from './StateProvider';
+import NewArticle from './NewArticle';
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
     });
   }, [])
 
-  
+
   return (
     <Router>
       <div className="app">
@@ -46,6 +47,10 @@ function App() {
           <Route path="/dashboard">
             <Header/>
             <Dashboard/>
+          </Route>
+          <Route path="/new_article">
+            <Header/>
+            <NewArticle/>
           </Route>
           <Route path="/">
             <Header/>

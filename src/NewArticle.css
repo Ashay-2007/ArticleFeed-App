@@ -1,0 +1,59 @@
+.newArticle {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 30px;
+    background-color: white;
+    max-width: 800px;
+    border: 1px solid lightgray;
+    margin-bottom: 45px;
+}
+
+.newArticleUpload__progress {
+    width: 100%;
+}
+
+.newArticle__title {
+    margin-bottom: 10px;
+}
+
+.newArticle__description {
+    margin-top: 10px;
+    min-height: 100px;
+}
+
+.newArticle__button {
+    background: #f0c14b;
+    border-radius: 2px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid;
+    margin-top: 10px;
+    border-color: #a88734 #9c7e31 #846a29;
+}
+
+.dashboard__articles {
+    
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* padding: 30px; */
+    /* background-color: white; */
+    max-width: 800px;
+    border: 1px solid lightgray;
+    margin-bottom: 45px;
+}
+
+.dashboard__articles > p {
+    font-weight: 500;
+    font-size: 50px;
+
+}
