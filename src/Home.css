@@ -3,6 +3,7 @@
     width: 100%;
     mask-image: linear-gradient(to bottom, rgb(0,0,0,1), rgb(0,0,0,0));
     z-index: -1;
+    margin-top: -200px;
     margin-bottom: -300px;
 }
 
