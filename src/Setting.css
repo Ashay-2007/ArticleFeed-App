@@ -1,0 +1,97 @@
+.setting {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 30px;
+    background-color: white;
+    max-width: 800px;
+    border: 1px solid lightgray;
+    margin-bottom: 45px;
+    border-radius: .5rem;
+    box-shadow: 0 4px 6px rgba(174, 190, 205, .3);
+    min-height: 60vh;
+    font-size: 35px;
+}
+
+.setting > span {
+    display: flex;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.setting__username {
+    margin-right: 30px;
+}
+
+.setting__email {
+    margin-right: 98px;
+}
+
+.setting__preferences {
+    margin-right: 10px;
+}
+
+.button, .input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+.setting__passwordEdit {
+    display: flex;
+    flex-direction: column;
+}
+.setting__oldPassword {
+    margin-bottom: 10px;
+}
+
+.editDropdown {
+    margin-bottom: 10px;
+}
+
+.setting__editPref {
+    font-size: 20px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.multiselect, .setting__password {
+    margin-bottom: 10px;
+}
+
+
+@media(max-width: 800px) {
+
+    .setting {
+        font-size: 25px;
+        min-height: 200vh;
+    }
+
+    .setting > span {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+@media(max-width: 450px) {
+
+    .setting {
+        font-size: 18px;
+        min-height: 200vh;
+        width: 90%;
+    }
+
+    .setting__username, .setting__email, .setting__preferences {
+        margin-right: 0px;
+    }
+    
+    .setting > span {
+        display: flex;
+        flex-direction: column;
+    }
+
+}

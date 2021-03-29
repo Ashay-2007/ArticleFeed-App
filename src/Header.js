@@ -1,19 +1,34 @@
 import React, { useState } from 'react'
 import "./Header.css";
-import { Button, Modal, Input } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Button, Modal, Input, Menu, MenuItem, Fade } from '@material-ui/core';
+import { Link, useHistory } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
 import { auth } from './firebase';
 
 function Header() {
     const [{user}] = useStateValue();
+    const history = useHistory();
 
     const handleAuthentication = () => {
         if(user) {
             auth.signOut();
+            
         }
+        history.push('/')
+        setAnchorEl(null);
     }
 
+    
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     return (
         <div className="header">
             <Link to="/">
@@ -34,6 +49,12 @@ function Header() {
                     <Link to="/new_article">
                         <Button>Create</Button>
                     </Link>
+                    <Link to="/edit_article">
+                        <Button>Edit</Button>
+                    </Link>
+                    <Link to="/setting">
+                        <Button>Setting</Button>
+                    </Link>
                     <Button onClick={handleAuthentication}>Logout</Button>
                 </div>
             ) : (
@@ -49,6 +70,63 @@ function Header() {
             )
 
             }
+
+            {
+                user ? (
+                    <div className="menu__hidden">
+                        <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
+                            Menu
+                        </Button>
+                        <Menu
+                            id="fade-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={open}
+                            onClose={handleClose}
+                            TransitionComponent={Fade}
+                        >
+                            <Link to="/">
+                                <MenuItem onClick={handleClose}>Home</MenuItem>
+                            </Link>
+                            <Link to="/dashboard">
+                                <MenuItem onClick={handleClose}>Dashboard</MenuItem>
+                            </Link>
+                            <Link to="/new_article">
+                                <MenuItem onClick={handleClose}>Create</MenuItem>
+                            </Link>
+                            <Link to="/edit_article">
+                                <MenuItem onClick={handleClose}>Edit</MenuItem>
+                            </Link>
+                            <Link to="/setting">
+                                <MenuItem onClick={handleClose}>Setting</MenuItem>
+                            </Link>
+                            <MenuItem onClick={handleAuthentication}>Logout</MenuItem>
+                        </Menu>
+                    </div>
+                ): (
+                    <div className="menu__hidden">
+                        <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
+                            Menu
+                        </Button>
+                        <Menu
+                            id="fade-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={open}
+                            onClose={handleClose}
+                            TransitionComponent={Fade}
+                        >
+                            <Link to="/login">
+                                <MenuItem onClick={handleClose}>Sign In</MenuItem>
+                            </Link>
+                            <Link to="/register">
+                                <MenuItem onClick={handleClose}>Sign Up</MenuItem>
+                            </Link>
+                        </Menu>
+                    </div>
+                )
+            }
+            
         </div>
     )
 }

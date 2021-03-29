@@ -1,7 +1,7 @@
 .header {
     position: sticky;
     top: 0 !important;
-    z-index: 1;
+    z-index: 1 !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,6 +14,17 @@
     object-fit: contain;
     max-height: 40px;
 }
-.header__loginContainer {
-    /* flex: 0; */
+
+@media(max-width: 800px) {
+
+    .header__loginContainer{
+        display: none;
+    }
+}
+
+@media(min-width: 800px) {
+  
+    .menu__hidden{
+        display: none;
+    }
 }

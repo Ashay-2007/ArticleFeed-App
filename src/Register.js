@@ -1,43 +1,95 @@
-import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Multiselect } from "multiselect-react-dropdown";
 import "./Register.css";
-import {auth} from "./firebase";
+import {auth, db} from "./firebase";
+import { useStateValue } from './StateProvider';
+import MultiSelect from "react-multi-select-component";
+
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 function Register() {
     const data = [
-        { interest: "sports", id: 1},
-        { interest: "politics", id: 1},
-        { interest: "space", id: 1},
-        { interest: "technology", id: 1},
-        { interest: "travel", id: 1},
-        { interest: "fashion", id: 1}
+        { label: "sports", value: "sports"},
+        { label: "politics", value: "politics"},
+        { label: "space", value: "space"},
+        { label: "technology", value: "technology"},
+        { label: "travel", value: "travel"},
+        { label: "fashion", value: "fashion"}
     ]
 
     const history = useHistory();
+    const [{user}] = useStateValue();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [options] = useState(data)
-
+    const [preferences, setPreferences] = useState([]);
+    const [preferencesValue, setPreferencesValue] = useState([]);
+    // const [success, setSuccess] = useState(false)
     
-    const register = (event) => {
-        event.preventDefault();
-        
+    const register = async () => {
         auth
         .createUserWithEmailAndPassword(email, password)
         .then((authUser) => {
             if (auth) {
                 history.push('/dashboard')
+                // console.log(user);
             }
+            db.collection("users").add({
+                email: email,
+                preferences: preferencesValue
+            })
             return authUser.user.updateProfile({
-                displayName: username
-          })
+                displayName: username,
+            })
         })
-        .catch((error) => alert(error.message))
-    
+        .catch((error) => {
+            alert(error.message)
+        })
+        .then(() => {
+            
+            
+        })
+        .catch((error) => {
+            alert(error.message)
+        })
+        
     }
+
+    // useEffect(() => {
+    //     console.log(user);
+    //     if(user){
+            
+    //     }
+        
+    // }, [user]);
+
+    useEffect(() => {
+            let valArray = [];
+            
+            preferences.map(pref => valArray.push(pref.value));
+            setPreferencesValue(valArray);
+    }, [preferences])
+
+
+    const [values, setValues] = React.useState({
+        amount: '',
+        password: '',
+        weight: '',
+        weightRange: '',
+        showPassword: false,
+    });
+
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
 
     return (
         <div className='register'>
@@ -50,29 +102,72 @@ function Register() {
             </Link>
 
             <div className='register__container'>
-                <h1>Sign-up</h1>
-
+                <div className="register__containerHeader">
+                    <span>Sign-up</span>
+                </div>
+                
+                
                 <form>
-                    <h5>Username</h5>
-                    <input type='text' value={username} onChange={e => setUsername(e.target.value)} />
 
-                    <h5>E-mail</h5>
-                    <input type='text' value={email} onChange={e => setEmail(e.target.value)} />
+                    <div className="register__username">
+                        <TextField className="register__usernameInput" type="text" label="Username" variant="outlined" onChange={event => setUsername(event.target.value)} value={username}/>
+                    </div>
+                            
 
-                    <h5>Password</h5>
-                    <input type='password' value={password} onChange={e => setPassword(e.target.value)} />
+                    <div className="register__email">
+                        <TextField className="register__emailInput" type="text" label="Email" variant="outlined" onChange={event => setEmail(event.target.value)} value={email}/>
+                    </div>
+                  
+
+                    <div className="register__password">
+                        
+                        <FormControl variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={values.showPassword ? 'text' : 'password'}
+                                value={password}
+                                onChange={event => setPassword(event.target.value)}
+                                endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                    >
+                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                                }
+                                labelWidth={80}
+                            />
+                        </FormControl>
+                        
+                    </div>
 
                     <h5>Preferences</h5>
-                    <Multiselect options={options} displayValue="interest"/>
+                    <MultiSelect value={preferences} options={options} displayValue="label" onChange={setPreferences}/>
 
+                    
+          
                 </form>
 
+                
                 <p>
                     By signing-up you agree to the ARTICLE FEED FAKE APP Conditions of Use & Sale. Please
                     see our Privacy Notice, our Cookies Notice and our Interest-Based Ads Notice.
                 </p>
 
-                <button  className='register__signupButton' onClick={register}>Create your ArticleFeed Account</button>
+                <Button  
+                    className='register__signupButton' 
+                    onClick={register} 
+                    disabled={!username || !email || !password || !preferencesValue.length}
+                    variant="contained"
+                    color="primary"
+                >
+                    Create new Account
+                </Button>
             </div>
         </div>
     )

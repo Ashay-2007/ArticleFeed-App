@@ -26,7 +26,7 @@ function CategoryArticles({category}) {
                 articles.map(({id, article}) => {
 
                     if(article.category === category)
-                        return <Article key={id} articleId={id} user={user} username={article.username} title={article.title} imageUrl={article.imageUrl} description={article.description} timestamp={new Date(article.timestamp?.toDate()).toUTCString()}/>
+                        return <Article key={id} articleId={id} user={user} username={article.username} title={article.title} imageUrl={article.imageUrl} description={article.description} likes={article.likes} timestamp={new Date(article.timestamp?.toDate()).toUTCString()}/>
                          
                     })
                 }

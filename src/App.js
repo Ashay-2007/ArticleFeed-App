@@ -10,11 +10,13 @@ import { auth } from './firebase';
 import { useStateValue } from './StateProvider';
 import NewArticle from './NewArticle';
 import CategoryArticles from './CategoryArticles';
+import EditPage from './EditPage';
+import Setting from './Setting';
 
 
 function App() {
 
-  const [{}, dispatch] = useStateValue();
+  const [{user}, dispatch] = useStateValue();
 
   useEffect(() => {
     auth.onAuthStateChanged(authUser => {
@@ -38,50 +40,78 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <Switch>
-          <Route path="/login">
-            <Login/>
-          </Route>
-          <Route path="/register">
-            <Register/>
-          </Route>
-          <Route path="/dashboard">
-            <Header/>
-            <Dashboard/>
-          </Route>
-          <Route path="/new_article">
-            <Header/>
-            <NewArticle/>
-          </Route>
-          <Route path="/sports">
-            <Header/>
-            <CategoryArticles category="sports"/>
-          </Route>
-          <Route path="/politics">
-            <Header/>
-            <CategoryArticles category="politics"/>
-          </Route>
-          <Route path="/technology">
-            <Header/>
-            <CategoryArticles category="technology"/>
-          </Route>
-          <Route path="/space">
-            <Header/>
-            <CategoryArticles category="space"/>
-          </Route>
-          <Route path="/travel">
-            <Header/>
-            <CategoryArticles category="travel"/>
-          </Route>
-          <Route path="/fashion">
-            <Header/>
-            <CategoryArticles category="fashion"/>
-          </Route>
-          <Route path="/">
-            <Header/>
-            <Home/>
-          </Route>
-        </Switch>
+
+          {
+            user ? (
+              <Switch>
+                <Route path="/dashboard">
+                  <Header/>
+                  <Dashboard/>
+                </Route>
+                <Route path="/new_article">
+                  <Header/>
+                  <NewArticle/>
+                </Route>
+                <Route path="/edit_article">
+                  <Header/>
+                  <EditPage/>
+                </Route>
+                <Route path="/setting">
+                  <Header/>
+                  <Setting/>
+                </Route>
+                <Route path="/sports">
+                  <Header/>
+                  <CategoryArticles category="sports"/>
+                </Route>
+                <Route path="/politics">
+                  <Header/>
+                  <CategoryArticles category="politics"/>
+                </Route>
+                <Route path="/technology">
+                  <Header/>
+                  <CategoryArticles category="technology"/>
+                </Route>
+                <Route path="/space">
+                  <Header/>
+                  <CategoryArticles category="space"/>
+                </Route>
+                <Route path="/travel">
+                  <Header/>
+                  <CategoryArticles category="travel"/>
+                </Route>
+                <Route path="/fashion">
+                  <Header/>
+                  <CategoryArticles category="fashion"/>
+                </Route>
+                <Route path="/">
+                  <Header/>
+                  <Home/>
+                </Route>
+              
+              </Switch>
+                       
+            ) : (
+              
+              <div>
+                <Switch>
+                <Route path="/login">
+                  <Login/>
+                </Route>
+                <Route path="/register">
+                  <Register/>
+                </Route>
+                <Route path="/">
+                  <Header/>
+                  <Home/>
+                </Route>
+                </Switch>
+                
+              </div>
+              
+            )
+          }
+          
       </div>
     </Router>
     

@@ -28,6 +28,7 @@
 .login__container > h1 {
     font-weight: 400;
     margin-bottom: 20px;
+    text-align: center;
   }
 
 .login__container > form > h5 {
@@ -59,4 +60,27 @@
 }
 
 
-  
+@media(max-width: 420px) {
+    .login__logo {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 30px;
+      }
+    
+    .login__container {
+        width: 95%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        border: 1px solid lightgray;
+        padding: 20px;
+    }
+    
+    .login__container > h1 {
+        font-size: 30px;
+        font-weight: 400;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+}
